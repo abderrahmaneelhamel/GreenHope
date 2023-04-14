@@ -60,9 +60,11 @@
                   <p class="text-sm text-white">
                     {{ $donation->description }}
                   </p>
-                  <a type="submit" class="inline-flex items-center justify-center px-5 py-3 mr-3 mt-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
-                    Take it!
-                </a>
+                  @if (Auth::user()->hasRole('Inneed'))
+                      <a type="submit" class="inline-flex items-center justify-center px-5 py-3 mr-3 mt-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
+                        Take it!
+                      </a>
+                  @endif
                 </div>
               </div>
             </div>
@@ -85,11 +87,13 @@
 </div> 
 </div>
 <!-- Modal toggle -->
-<div class="flex justify-center p-5">
-<button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="button2" type="button">
-    Donate
-  </button>
-</div>  
+@if ((Auth::user()->hasRole('Donor')) || (Auth::user()->hasRole('Organisation')) || (Auth::user()->hasRole('Admin')))
+  <div class="flex justify-center p-5">
+  <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="button2" type="button">
+      Donate
+    </button>
+  </div>  
+@endif
   <!-- Main modal -->
   <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
       <div class="relative w-full h-full max-w-md md:h-auto">
@@ -129,7 +133,7 @@
                         <div>
                             <x-input-label for="user_id" :value="__('do you have a specific person in mind?')" />
                             <select class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600" name="user_id" id="user_id">
-                                <option value="">Choose a user</option>
+                                <option value="">No</option>
                                 @foreach($users as $key => $user)
                                   @if ($user->role != 'organisation' && !($user->hasRole('Admin')))
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>

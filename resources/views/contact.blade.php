@@ -26,7 +26,7 @@
         <div class="pt-5 mt-1 mb-0 w-full flex justify-center">
             <p class="max-w-2xl mb-6 font-bold text-green-600 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Contact Us</p>
         </div>
-        <div class="container px-5 pt-5 pb-24 mx-auto flex sm:flex-nowrap flex-wrap">
+        <div class="container px-5 pt-5 pb-24 mx-auto flex sm:flex-nowrap ">
           <div class="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
             <iframe width="100%" height="100%" class="absolute inset-0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.699890878711!2d-9.237275085795131!3d32.29304571581328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdac211719897669%3A0x6f59fa5bb517f58a!2sYoucode%20Safi!5e0!3m2!1sen!2sma!4v1680187127822!5m2!1sen!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            <div class="bg-white relative flex flex-wrap py-6 rounded shadow-md">
               <div class="lg:w-1/2 px-6">

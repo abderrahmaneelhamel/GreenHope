@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Models\events;
 use App\Models\needs;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/needs', App\Http\Controllers\needsController::class);
     Route::resource('/categories', App\Http\Controllers\categoriesController::class);
     Route::post('/donationGeting', [App\Http\Controllers\DonationsController::class, 'geting'])->name('donationGeting');
+    Route::get('/Mydonation', [App\Http\Controllers\DonationsController::class, 'Mydonation'])->name('Mydonation');
     Route::post('/donation', [App\Http\Controllers\DonationsController::class, 'add'])->name('donation.add');
     Route::post('/event', [App\Http\Controllers\EventsController::class, 'add'])->name('event.add');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -45,6 +48,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('contact');
     })->name('contact');
 });
+
+Route::get('/send-notification', [NotificationController::class, 'sendDonationNotification']);
 
 
 require __DIR__.'/auth.php';

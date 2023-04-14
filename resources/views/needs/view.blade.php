@@ -23,13 +23,17 @@
       <div class="absolute top-0 -left-4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
       <div class="absolute top-0 -right-4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
       <div class="absolute -bottom-32 left-20 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      <div class="m-8 w-full relative space-y-4">
+      <div class="m-8 w-full relative">
         <!-- Modal toggle -->
-<div class="flex justify-center p-5">
+@if ((Auth::user()->hasRole('Organisation')) || (Auth::user()->hasRole('Donor')) || (Auth::user()->hasRole('Inneed')) || (Auth::user()->hasRole('Admin')))
+
+@if (Auth::user()->hasRole('Inneed'))
+  <div class="flex justify-center p-5">
     <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="button2" type="button">
         Post a need
-      </button>
-    </div>  
+    </button>
+  </div> 
+@endif
       <!-- Main modal -->
       <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
           <div class="relative w-full h-full max-w-md md:h-auto">
@@ -71,21 +75,21 @@
             </a>
         </div>
     </div>
-@if($needs->count())
-        
+<div class="pt-5 w-full flex justify-center">
+  <p class="max-w-2xl mb-6 font-bold text-green-600 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Some of People Needs</p>
+</div>
+@if($needs->count())      
   @foreach($needs as $key => $need)
-         <div class="w-full p-5 bg-white rounded-lg flex items-center justify-between space-x-8">
-          <div class="flex justify-between items-center">
-            <div class="flex mr-5">
+         <div class="w-full p-5 my-7 bg-white rounded-lg flex items-center justify-between space-x-8">
+          <div class="flex w-full justify-between items-center">
+          <div class="flex mr-5">
             <div class="text-gray-500">{{ $need->inneed_user->name }} needs : </div>
             <div class="text-green-600 ml-2">{{ $need->label }}</div>
           </div>            
 <!-- Modal toggle -->
-
-<button data-modal-target="authentication-modal{{$need->id}}" data-modal-toggle="authentication-modal{{$need->id}}" class="button1" type="button">
+  <button data-modal-target="authentication-modal{{$need->id}}" data-modal-toggle="authentication-modal{{$need->id}}" class="button1" type="button">
     Donate
   </button>
-  
   <!-- Main modal -->
   <div id="authentication-modal{{$need->id}}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
       <div class="relative w-full h-full max-w-md md:h-auto">
@@ -130,7 +134,20 @@
           </div>
         </div>
     @endforeach
-    @endif     
+  @endif   
+
+@else
+<div class="flex flex-col justify-center">
+<div class="pt-5 w-full flex justify-center">
+  <p class="max-w-2xl mb-6 font-bold text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Your application is still in process</p>
+</div>
+<div class="w-96 pl-44">
+<button class="button2" type="button">
+  <a href="/home">Go Back</a>
+</button>
+</div>
+</div>
+@endif
       </div>
     </div>
   </div>
